@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {"com.rcorrent.personsignup"})
-public class PersonSignUpApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PersonSignUpApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
