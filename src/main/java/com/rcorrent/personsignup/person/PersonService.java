@@ -13,4 +13,8 @@ public class PersonService {
         person.setEmail("email");
         return person;
     }
+
+    public UUID insert(final Person person) {
+        return null;
+    }
 }
