@@ -1,7 +1,9 @@
 package com.rcorrent.personsignup.person;
 
+import javax.persistence.Entity;
 import java.util.UUID;
 
+@Entity
 public class Person {
 
     private UUID id;
