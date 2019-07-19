@@ -15,7 +15,7 @@ public class PersonController {
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Person getPersonById(@PathVariable final UUID id) {
-        return personService.getPersonById(id);
+        return personService.findById(id);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

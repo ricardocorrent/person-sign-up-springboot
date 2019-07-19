@@ -1,20 +1,26 @@
 package com.rcorrent.personsignup.person;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class PersonService {
-    public Person getPersonById(final UUID id) {
-        final Person person = new Person();
-        person.setId(id);
-        person.setName("Name");
-        person.setEmail("email");
-        return person;
-    }
+
+    @Autowired
+    @Deprecated
+    PersonRepository repository;
 
     public UUID insert(final Person person) {
-        return null;
+        person.setId(UUID.randomUUID());
+        return repository.save(person).getId();
     }
+
+    public Person findById(final UUID id) {
+        return repository.findById(id).orElse(null);
+    }
+
+
 }
