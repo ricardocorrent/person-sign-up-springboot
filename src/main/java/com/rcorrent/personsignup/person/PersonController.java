@@ -1,7 +1,6 @@
 package com.rcorrent.personsignup.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +14,20 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping(
-            path = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    private Person getPersonById(@PathVariable final UUID id) {
-        return personService.findById(id);
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private Response getPersonById(@PathVariable final UUID id) {
+        return Response
+                .ok()
+                .entity(personService.findById(id))
+                .build();
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    private Response list(){
+        return Response
+                .ok()
+                .entity(personService.list())
+                .build();
     }
 
     @PostMapping(
@@ -29,7 +36,7 @@ public class PersonController {
     )
     private Response insert(@RequestBody final Person person) {
         return Response
-                .status(HttpStatus.OK.value())
+                .status(Response.Status.CREATED)
                 .entity(personService.insert(person))
                 .build();
     }

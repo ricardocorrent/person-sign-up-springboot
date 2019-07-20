@@ -3,10 +3,9 @@ package com.rcorrent.personsignup.person;
 import com.rcorrent.personsignup.persistence.model.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,8 +18,10 @@ import java.util.UUID;
 @Table(name =  "person")
 public class Person implements BaseModel {
 
-    @NotNull
     @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @NotNull
