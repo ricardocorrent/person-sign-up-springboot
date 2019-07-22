@@ -4,6 +4,7 @@ import com.rcorrent.personsignup.exception.RegisterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Service
 public class PersonService {
 
-    @Autowired
+    @Inject
     private PersonRepository repository;
 
     public Person insert(final Person person) {
@@ -23,7 +24,7 @@ public class PersonService {
         return repository.findById(id).orElseThrow(RegisterNotFoundException::new);
     }
 
-    private Person update(final Person person) {
+    public Person update(final Person person) {
         final Person personFromDb = this.repository
                 .findById(person.getId()).orElse(null);
 
@@ -35,7 +36,7 @@ public class PersonService {
         }
     }
 
-    private void delete(final UUID id) {
+    public void delete(final UUID id) {
         final Person personFromDb = this.repository
                 .findById(id).orElseThrow(RegisterNotFoundException::new);
         if (personFromDb != null) {
