@@ -2,6 +2,7 @@ package com.rcorrent.personsignup.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.core.Response;
@@ -14,22 +15,12 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping(
-            path = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    private Response getPersonById(@PathVariable final UUID id) {
-        return Response
-                .ok()
-                .entity(personService.findById(id))
-                .build();
+    @GetMapping(path = "/{id}")
+    private ResponseEntity<?> getPersonById(@PathVariable final UUID id) {
+        return ResponseEntity.ok(personService.findById(id));
     }
 
-    @PutMapping(
-            path = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PutMapping(path = "/{id}")
     private Response update(@PathVariable final UUID id, @RequestBody final Person person) {
         person.setId(id);
         return Response
@@ -38,10 +29,7 @@ public class PersonController {
                 .build();
     }
 
-    @GetMapping(
-            path = "/persons",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @GetMapping(path = "/persons" )
     private Response list(){
         return Response
                 .ok()
@@ -49,10 +37,7 @@ public class PersonController {
                 .build();
     }
 
-    @PostMapping(
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PostMapping
     private Response insert(@RequestBody final Person person) {
         return Response
                 .status(Response.Status.CREATED)
@@ -60,9 +45,7 @@ public class PersonController {
                 .build();
     }
 
-    @DeleteMapping(
-            path = "/{id}"
-    )
+    @DeleteMapping(path = "/{id}")
     private Response delete(@PathVariable final UUID id) {
         this.personService.delete(id);
         return Response
