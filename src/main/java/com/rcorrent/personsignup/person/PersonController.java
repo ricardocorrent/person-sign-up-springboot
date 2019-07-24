@@ -1,10 +1,12 @@
 package com.rcorrent.personsignup.person;
 
+import com.rcorrent.personsignup.person.vo.PersonVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
 
@@ -12,7 +14,7 @@ import java.util.UUID;
 @RequestMapping("/person")
 public class PersonController {
 
-    @Autowired
+    @Inject
     private PersonService personService;
 
     @GetMapping(path = "/{id}")
@@ -21,11 +23,11 @@ public class PersonController {
     }
 
     @PutMapping(path = "/{id}")
-    private Response update(@PathVariable final UUID id, @RequestBody final Person person) {
-        person.setId(id);
+    private Response update(@PathVariable final UUID id, @RequestBody final PersonVO personVO) {
+        personVO.setId(id);
         return Response
                 .ok()
-                .entity(personService.update(person))
+                .entity(personService.update(personVO))
                 .build();
     }
 
@@ -38,10 +40,10 @@ public class PersonController {
     }
 
     @PostMapping
-    private Response insert(@RequestBody final Person person) {
+    private Response insert(@RequestBody final PersonVO personVO) {
         return Response
                 .status(Response.Status.CREATED)
-                .entity(personService.insert(person))
+                .entity(personService.insert(personVO))
                 .build();
     }
 
