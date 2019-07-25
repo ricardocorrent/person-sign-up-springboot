@@ -1,9 +1,12 @@
 package com.rcorrent.personsignup.person;
 
+import com.rcorrent.personsignup.person.vo.PersonVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
 
@@ -11,37 +14,24 @@ import java.util.UUID;
 @RequestMapping("/person")
 public class PersonController {
 
-    @Autowired
+    @Inject
     private PersonService personService;
 
-    @GetMapping(
-            path = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    private Response getPersonById(@PathVariable final UUID id) {
+    @GetMapping(path = "/{id}")
+    private ResponseEntity<?> getPersonById(@PathVariable final UUID id) {
+        return ResponseEntity.ok(personService.findById(id));
+    }
+
+    @PutMapping(path = "/{id}")
+    private Response update(@PathVariable final UUID id, @RequestBody final PersonVO personVO) {
+        personVO.setId(id);
         return Response
                 .ok()
-                .entity(personService.findById(id))
+                .entity(personService.update(personVO))
                 .build();
     }
 
-    @PutMapping(
-            path = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
-    private Response update(@PathVariable final UUID id, @RequestBody final Person person) {
-        person.setId(id);
-        return Response
-                .ok()
-                .entity(personService.update(person))
-                .build();
-    }
-
-    @GetMapping(
-            path = "/persons",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @GetMapping(path = "/persons" )
     private Response list(){
         return Response
                 .ok()
@@ -49,20 +39,15 @@ public class PersonController {
                 .build();
     }
 
-    @PostMapping(
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
-    private Response insert(@RequestBody final Person person) {
+    @PostMapping
+    private Response insert(@RequestBody final PersonVO personVO) {
         return Response
                 .status(Response.Status.CREATED)
-                .entity(personService.insert(person))
+                .entity(personService.insert(personVO))
                 .build();
     }
 
-    @DeleteMapping(
-            path = "/{id}"
-    )
+    @DeleteMapping(path = "/{id}")
     private Response delete(@PathVariable final UUID id) {
         this.personService.delete(id);
         return Response
