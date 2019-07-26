@@ -1,7 +1,8 @@
-package com.rcorrent.personsignup.person.vo;
+package com.rcorrent.personsignup.personinformation.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.rcorrent.personsignup.person.Person;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,14 +12,16 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@JsonPropertyOrder({"id", "name", "email"})
-public class PersonVO implements Serializable {
+@JsonPropertyOrder({"id", "person", "label", "value"})
+public class PersonInformationVO implements Serializable {
 
     private UUID id;
 
-    private String name;
+    private Person person;
 
-    private String email;
+    private String label;
+
+    private String value;
 
     @JsonIgnore
     private OffsetDateTime createdAt;

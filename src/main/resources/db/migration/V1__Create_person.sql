@@ -3,8 +3,8 @@ CREATE TABLE IF NOT EXISTS `person`
     `id`        BINARY(16)   NOT NULL,
     `name`      VARCHAR(255) NOT NULL,
     `email`     VARCHAR(200) NOT NULL,
-    `createdAt` DATETIME,
-    `updatedAt` DATETIME,
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
 )
@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS `person_information`
     `person_id` BINARY(16)   NOT NULL,
     `label`     VARCHAR(100) NOT NULL,
     `value`     VARCHAR(255) NOT NULL,
-    `createdAt` DATETIME,
-    `updatedAt` DATETIME,
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
     PRIMARY KEY (`id`, `person_id`),
     INDEX `fk_person_information_person_idx` (`person_id` ASC) VISIBLE,
     CONSTRAINT `fk_person_information_person`

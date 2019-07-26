@@ -1,8 +1,6 @@
 package com.rcorrent.personsignup.person;
 
 import com.rcorrent.personsignup.person.vo.PersonVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +29,8 @@ public class PersonController {
                 .build();
     }
 
-    @GetMapping(path = "/persons" )
-    private Response list(){
+    @GetMapping(path = "/persons")
+    private Response list() {
         return Response
                 .ok()
                 .entity(personService.list())

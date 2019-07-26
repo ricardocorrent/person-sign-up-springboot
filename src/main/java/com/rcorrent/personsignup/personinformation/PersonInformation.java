@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -18,6 +17,7 @@ import java.util.UUID;
 public class PersonInformation implements BaseModel {
 
     @Id
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @NotNull
@@ -26,11 +26,9 @@ public class PersonInformation implements BaseModel {
     private Person person;
 
     @NotNull
-    @Max(50)
     private String label;
 
     @NotNull
-    @Max(100)
     private String value;
 
     private OffsetDateTime createdAt;

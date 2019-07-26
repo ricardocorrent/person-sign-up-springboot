@@ -23,7 +23,9 @@ public class PersonService {
     }
 
     public PersonVO findById(final UUID id) {
-        return DozerAdapter.parseObject(repository.findById(id).orElseThrow(RegisterNotFoundException::new), PersonVO.class);
+        return DozerAdapter.parseObject(
+                repository.findById(id)
+                        .orElseThrow(RegisterNotFoundException::new), PersonVO.class);
     }
 
     public PersonVO update(final PersonVO personVo) {
