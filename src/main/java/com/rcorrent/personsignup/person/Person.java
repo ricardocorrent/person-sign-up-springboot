@@ -1,5 +1,6 @@
 package com.rcorrent.personsignup.person;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rcorrent.personsignup.persistence.model.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,8 +33,10 @@ public class Person implements BaseModel {
     @Email
     private String email;
 
+    @JsonIgnore
     private OffsetDateTime createdAt;
 
+    @JsonIgnore
     private OffsetDateTime updatedAt;
 
 }

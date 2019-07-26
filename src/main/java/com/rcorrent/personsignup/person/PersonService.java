@@ -1,9 +1,8 @@
 package com.rcorrent.personsignup.person;
 
-import com.rcorrent.personsignup.converter.DozerConverter;
+import com.rcorrent.personsignup.adapter.DozerAdapter;
 import com.rcorrent.personsignup.exception.RegisterNotFoundException;
 import com.rcorrent.personsignup.person.vo.PersonVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -18,24 +17,24 @@ public class PersonService {
     private PersonRepository repository;
 
     public PersonVO insert(final PersonVO personVO) {
-        final Person person = DozerConverter.parseObject(personVO, Person.class);
+        final Person person = DozerAdapter.parseObject(personVO, Person.class);
         this.doGenerateInsertValues(person);
-        return DozerConverter.parseObject(repository.save(person), PersonVO.class);
+        return DozerAdapter.parseObject(repository.save(person), PersonVO.class);
     }
 
     public PersonVO findById(final UUID id) {
-        return DozerConverter.parseObject(repository.findById(id).orElseThrow(RegisterNotFoundException::new), PersonVO.class);
+        return DozerAdapter.parseObject(repository.findById(id).orElseThrow(RegisterNotFoundException::new), PersonVO.class);
     }
 
     public PersonVO update(final PersonVO personVo) {
         final Person personFromDb = this.repository
                 .findById(personVo.getId()).orElse(null);
 
-        final Person person = DozerConverter.parseObject(personVo, Person.class);
+        final Person person = DozerAdapter.parseObject(personVo, Person.class);
 
         if (personFromDb != null) {
             this.doGenerateUpdateValues(person, personFromDb);
-            return DozerConverter.parseObject(this.repository.save(personFromDb), PersonVO.class);
+            return DozerAdapter.parseObject(this.repository.save(personFromDb), PersonVO.class);
         } else {
             throw new RegisterNotFoundException();
         }
@@ -62,7 +61,7 @@ public class PersonService {
     }
 
     public List<PersonVO> list() {
-        return DozerConverter.parseListObjects ((List<Person>) repository.findAll(), PersonVO.class);
+        return DozerAdapter.parseListObjects ((List<Person>) repository.findAll(), PersonVO.class);
     }
 
 }

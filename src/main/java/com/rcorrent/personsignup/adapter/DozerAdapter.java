@@ -1,4 +1,4 @@
-package com.rcorrent.personsignup.converter;
+package com.rcorrent.personsignup.adapter;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
@@ -6,7 +6,7 @@ import com.github.dozermapper.core.Mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DozerConverter {
+public class DozerAdapter {
 
     private static final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 

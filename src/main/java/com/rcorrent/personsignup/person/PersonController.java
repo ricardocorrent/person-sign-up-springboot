@@ -17,7 +17,7 @@ public class PersonController {
     @Inject
     private PersonService personService;
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/{id}", produces = {"application/json", "application/xml"})
     private ResponseEntity<?> getPersonById(@PathVariable final UUID id) {
         return ResponseEntity.ok(personService.findById(id));
     }
