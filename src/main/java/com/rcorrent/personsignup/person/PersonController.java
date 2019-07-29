@@ -1,6 +1,7 @@
 package com.rcorrent.personsignup.person;
 
 import com.rcorrent.personsignup.person.vo.PersonVO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,11 +39,10 @@ public class PersonController {
     }
 
     @PostMapping
-    private Response insert(@RequestBody final PersonVO personVO) {
-        return Response
-                .status(Response.Status.CREATED)
-                .entity(personService.insert(personVO))
-                .build();
+    private ResponseEntity<?> insert(@RequestBody final PersonVO personVO) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(personService.insert(personVO));
     }
 
     @DeleteMapping(path = "/{id}")

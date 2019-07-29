@@ -3,6 +3,7 @@ package com.rcorrent.personsignup.person;
 import com.rcorrent.personsignup.adapter.DozerAdapter;
 import com.rcorrent.personsignup.exception.RegisterNotFoundException;
 import com.rcorrent.personsignup.person.vo.PersonVO;
+import com.rcorrent.personsignup.server.validation.EValidationType;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -13,11 +14,20 @@ import java.util.UUID;
 @Service
 public class PersonService {
 
+    private final PersonRepository repository;
+
+    private final PersonValidator personValidator;
+
     @Inject
-    private PersonRepository repository;
+    public PersonService(final PersonRepository repository,
+                         final PersonValidator personValidator) {
+        this.repository = repository;
+        this.personValidator = personValidator;
+    }
 
     public PersonVO insert(final PersonVO personVO) {
         final Person person = DozerAdapter.parseObject(personVO, Person.class);
+        this.personValidator.validate(person, EValidationType.INSERT);
         this.doGenerateInsertValues(person);
         return DozerAdapter.parseObject(repository.save(person), PersonVO.class);
     }
