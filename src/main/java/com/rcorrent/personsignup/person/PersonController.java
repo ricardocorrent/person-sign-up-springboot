@@ -1,6 +1,6 @@
 package com.rcorrent.personsignup.person;
 
-import com.rcorrent.personsignup.person.vo.PersonVO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,12 +8,20 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/person")
 public class PersonController {
 
     @Inject
     private PersonService personService;
+
+    @PostMapping
+    private ResponseEntity<?> insert(@RequestBody final PersonVO personVO) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(personService.insert(personVO));
+    }
 
     @GetMapping(path = "/{id}", produces = {"application/json", "application/xml"})
     private ResponseEntity<?> getPersonById(@PathVariable final UUID id) {
@@ -34,14 +42,6 @@ public class PersonController {
         return Response
                 .ok()
                 .entity(personService.list())
-                .build();
-    }
-
-    @PostMapping
-    private Response insert(@RequestBody final PersonVO personVO) {
-        return Response
-                .status(Response.Status.CREATED)
-                .entity(personService.insert(personVO))
                 .build();
     }
 

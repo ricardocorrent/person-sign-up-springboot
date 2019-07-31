@@ -1,6 +1,5 @@
 package com.rcorrent.personsignup.personinformation;
 
-import com.rcorrent.personsignup.personinformation.vo.PersonInformationVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

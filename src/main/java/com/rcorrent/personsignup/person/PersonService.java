@@ -2,7 +2,6 @@ package com.rcorrent.personsignup.person;
 
 import com.rcorrent.personsignup.adapter.DozerAdapter;
 import com.rcorrent.personsignup.exception.RegisterNotFoundException;
-import com.rcorrent.personsignup.person.vo.PersonVO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;

@@ -1,4 +1,4 @@
-package com.rcorrent.personsignup.person.vo;
+package com.rcorrent.personsignup.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -20,10 +20,8 @@ public class PersonVO implements Serializable {
 
     private String email;
 
-    @JsonIgnore
     private OffsetDateTime createdAt;
 
-    @JsonIgnore
     private OffsetDateTime updatedAt;
 
 }

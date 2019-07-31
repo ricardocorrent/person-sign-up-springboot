@@ -1,6 +1,5 @@
-package com.rcorrent.personsignup.personinformation.vo;
+package com.rcorrent.personsignup.personinformation;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.rcorrent.personsignup.person.Person;
 import lombok.Getter;
@@ -23,10 +22,8 @@ public class PersonInformationVO implements Serializable {
 
     private String value;
 
-    @JsonIgnore
     private OffsetDateTime createdAt;
 
-    @JsonIgnore
     private OffsetDateTime updatedAt;
 
 }
