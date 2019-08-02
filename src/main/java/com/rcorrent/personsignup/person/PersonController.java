@@ -13,8 +13,12 @@ import java.util.UUID;
 @RequestMapping("/person")
 public class PersonController {
 
+    private final PersonService personService;
+
     @Inject
-    private PersonService personService;
+    public PersonController(final PersonService personService) {
+        this.personService = personService;
+    }
 
     @PostMapping
     private ResponseEntity<?> insert(@RequestBody final PersonVO personVO) {
@@ -29,27 +33,25 @@ public class PersonController {
     }
 
     @PutMapping(path = "/{id}")
-    private Response update(@PathVariable final UUID id, @RequestBody final PersonVO personVO) {
+    private ResponseEntity<?> update(@PathVariable final UUID id, @RequestBody final PersonVO personVO) {
         personVO.setId(id);
-        return Response
-                .ok()
-                .entity(personService.update(personVO))
-                .build();
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(personService.update(personVO));
     }
 
     @GetMapping(path = "/persons")
-    private Response list() {
-        return Response
-                .ok()
-                .entity(personService.list())
-                .build();
+    private ResponseEntity<?> list() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(personService.list());
     }
 
     @DeleteMapping(path = "/{id}")
-    private Response delete(@PathVariable final UUID id) {
+    private ResponseEntity<?> delete(@PathVariable final UUID id) {
         this.personService.delete(id);
-        return Response
-                .status(Response.Status.NO_CONTENT)
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
                 .build();
     }
 }
