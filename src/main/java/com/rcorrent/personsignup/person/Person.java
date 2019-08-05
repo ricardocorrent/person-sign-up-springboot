@@ -2,6 +2,7 @@ package com.rcorrent.personsignup.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rcorrent.personsignup.persistence.model.BaseModel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 @Entity
