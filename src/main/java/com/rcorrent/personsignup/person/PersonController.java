@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person")
 public class PersonController {
 
     private final PersonService personService;

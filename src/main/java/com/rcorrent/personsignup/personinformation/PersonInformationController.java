@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/person-information")
+@RequestMapping("/api/person-information")
 public class PersonInformationController {
 
     @Inject
