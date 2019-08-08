@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 @CrossOrigin
